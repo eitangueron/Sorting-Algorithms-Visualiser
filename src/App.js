@@ -9,23 +9,9 @@ const App = observer((props) => {
     
   const [numsArray, setNumsArray] = useState([1,2,3])
 
-
-  const getRandomArbitrary =  (min, max) => {
-    return Math.random() * (max - min) + min;
-  }
-
-  const createRandomNumsArray = (numsAmmount, minNumsRange, maxNumsRange) => {
-    let newNums = [] 
-    debugger
-    for(let i=0; i++; i<numsAmmount){
-      let newNum = getRandomArbitrary(minNumsRange,maxNumsRange)
-      newNums.push(newNum)
-    }
-    setNumsArray([...newNums])
-  }
     return (
        <div>
-         <ControlBar createRandomNumsArray={createRandomNumsArray}/>
+         <ControlBar setNumsArray={setNumsArray}/>
          <Bars numsArray={numsArray}/>
        </div>
     )
