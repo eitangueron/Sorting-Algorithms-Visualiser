@@ -5,11 +5,11 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
 
-// import {Store as store} from './stores/storeName'
+import {BarsStore} from './stores/bars-store'
 
-// const store = new Store()
+const barsStore = new BarsStore()
 
-const stores = {}   //insert stores here
+const stores = {barsStore:barsStore}  
 
 ReactDOM.render(<Provider {...stores}><App /></Provider>,document.getElementById('root')
 );
