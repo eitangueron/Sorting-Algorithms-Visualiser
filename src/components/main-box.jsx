@@ -1,18 +1,20 @@
 import React from 'react';
 
-const Bars = (props) => {
+const MainBox = (props) => {
     
 
     return (
-       <div style={{border:'solid 1px black', width:'100vw', height:'90vh',}}>
+       <div style={{border:'solid 1px black', width:'90vw', height:'90vh', marginLeft: "5vw", 
+       display: "grid", alignItems: "center", gridTemplateColumns: "repeat(20, 1fr)"}}>
             {props.numsArray.map( (n,i) => 
                 <div key={`bar ${n} / ${i}`} 
                 style={{backgroundColor:'#3498db', border:'1px solid black',
             margin:'10px', display:'inline-block', width:'10px', height:`${n*0.09}vh`,
-            position: 'relative', top:`calc(88vh - ${n*0.09}vh)` }}> {n} </div>)
+            // position: 'relative',
+             top:`calc(88vh - ${n*0.09}vh)` }}> {n} </div>)
             }
        </div>
     )
 }
         
-export default Bars;
+export default MainBox;
