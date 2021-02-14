@@ -19,7 +19,7 @@ const App = observer((props) => {
   return (
       <div>
         <ControlBar data={data} setData={setData} />
-        <MainBox data={data} />
+        {/* <MainBox data={data} /> */}
       </div>
   )
 

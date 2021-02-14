@@ -5,8 +5,22 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     place-items: center;
+    background-color:#3498db;
 }
 
 .MuiSlider-root{
-    color: #3498db;
+    /* color: whitesmoke; */
+    color:"black"
 }
+
+.MuiTypography-gutterBottom{
+    color: black;
+}
+
+button{
+    background-color: aliceblue;
+}
+
+/* .MuiAppBar-root{
+    background-color: #3498db;
+} */
