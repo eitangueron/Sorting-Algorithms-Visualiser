@@ -10,7 +10,7 @@ const MainBox = (props) => {
        gridTemplateColumns: `repeat(${data.barAmount}, 1fr)`
         }}>
             {data.numsArray.map( (num,k) => 
-                <div class="bar" key={`bar ${num} / ${k}`} 
+                <div className="bar" key={`bar ${num} / ${k}`} 
                     style={{
                     // margin:'0 5px', 
                     width:`calc(95vh / (${data.barAmount}))`, 
@@ -18,7 +18,7 @@ const MainBox = (props) => {
                     height:`${num*0.089}vh`,
                     top:`calc(88vh - ${num*0.089}vh)`
                 }}>
-                    <span class="bar-size">{num}</span> 
+                    <span className="bar-size">{num}</span> 
                 </div>)
             }
        </div>

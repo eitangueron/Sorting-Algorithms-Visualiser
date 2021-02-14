@@ -10,7 +10,7 @@ const App = observer((props) => {
   const [data, setData] = useState({
     numsArray:[1000,200,500],
     barAmount:20,
-    sortSpeed:1,
+    sortSpeed:1.0,
     minBarSize:100,
     maxBarSize:1000
   },)

@@ -6,3 +6,7 @@
     grid-template-columns: repeat(3, 1fr);
     place-items: center;
 }
+
+.MuiSlider-root{
+    color: #3498db;
+}
