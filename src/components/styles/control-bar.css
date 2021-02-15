@@ -22,22 +22,16 @@
     grid-template-columns: 1fr 1fr;
 }
 
-.MuiSlider-root{
-    /* color: whitesmoke; */
-    color:"black"
-}
-
 .MuiTypography-gutterBottom{
     color: black;
 }
 
 button{
-    background-color: aliceblue;
+    background-color: white;
     width: 150px;
     height: 7vh;
-    font-size: inherit;
 }
 
-/* .MuiAppBar-root{
-    background-color: #3498db;
-} */
+.MuiNativeSelect-select.MuiNativeSelect-select{
+    font-weight: bold;
+}

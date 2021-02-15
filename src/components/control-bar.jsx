@@ -9,6 +9,8 @@ import FormControl from '@material-ui/core/FormControl';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import AppBar from '@material-ui/core/AppBar';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 
 import './styles/control-bar.css';
@@ -75,12 +77,13 @@ const ControlBar = (props) => {
                         />
                 </div>
 
-                <Button variant="contained" onClick={generateNewBars}> Create New Array </Button>
+                <Button variant="contained" onClick={generateNewBars} style={{background:"white", fontSize:"16px", fontWeight:'bold', textTransform:"none", lineHeight:"1.3"}}> Create New Bars </Button>
 
            </div>
 
            <div id="controlBar-chooseSortAlgo-right">
                 <FormControl>
+                <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithem</InputLabel>
                     <NativeSelect 
                     onChange={(event) => updateCurrentAlgo(event.target.value)}
                     // value={state.age} name="age" className={classes.selectEmpty} inputProps={{ 'aria-label': 'age' }}
@@ -89,10 +92,10 @@ const ControlBar = (props) => {
                     <option value="quickSort">Quick sort</option>
                     <option value="bubbleSort">Bubble sort</option>
                     </NativeSelect>
-                    <FormHelperText>Pick an algorithem</FormHelperText>
+                    {/* <FormHelperText>Pick an algorithem</FormHelperText> */}
                 </FormControl>
                 
-                <Button variant="contained"> Sort! </Button>
+                <Button variant="contained" style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}> Sort! </Button>
 
             </div>
 
