@@ -11,7 +11,7 @@ const MainBox = (props) => {
        gridTemplateColumns: `repeat(${data.barAmount}, 1fr)`
         }}>
             {data.numsArray.map( (num,k) => 
-                <Tooltip title={num}>
+                <Tooltip title={num} >
                 <div className="bar" key={`bar ${num} / ${k}`} 
                     style={{
                     width:`calc(95vh / (${data.barAmount}))`, 
