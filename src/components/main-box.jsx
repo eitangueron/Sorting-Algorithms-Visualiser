@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/main-box.css'
+import Tooltip from '@material-ui/core/Tooltip';
 
 const MainBox = (props) => {
     
@@ -10,16 +11,17 @@ const MainBox = (props) => {
        gridTemplateColumns: `repeat(${data.barAmount}, 1fr)`
         }}>
             {data.numsArray.map( (num,k) => 
+                <Tooltip title={num}>
                 <div className="bar" key={`bar ${num} / ${k}`} 
                     style={{
-                    // margin:'0 5px', 
                     width:`calc(95vh / (${data.barAmount}))`, 
-                    // width:`${50 - props.barAmount}px`, 
                     height:`${num*0.089}vh`,
                     top:`calc(88vh - ${num*0.089}vh)`
                 }}>
-                    <span className="bar-size">{num}</span> 
-                </div>)
+                {data.barAmount <=30 ? 
+                    <span className="bar-size">{num}</span> : null}
+                </div>
+                </Tooltip>)
             }
        </div>
     )
