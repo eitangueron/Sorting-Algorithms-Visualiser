@@ -3,9 +3,23 @@
     height: 10vh;
     width: 100vw;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     place-items: center;
     background-color:#3498db;
+}
+
+#controlBar-setters-left{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-items: center;
+}
+
+#controlBar-chooseSortAlgo-right{
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .MuiSlider-root{
@@ -19,6 +33,9 @@
 
 button{
     background-color: aliceblue;
+    width: 150px;
+    height: 7vh;
+    font-size: inherit;
 }
 
 /* .MuiAppBar-root{

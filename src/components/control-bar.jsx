@@ -54,15 +54,9 @@ const ControlBar = (props) => {
     return (
         <AppBar position="static">
        <div id="controlBar-container">
+
            <div id="controlBar-setters-left">
-                <div id="barAmount-slider-container">
-                    <Typography id="barAmount-slider" gutterBottom> Bar Amount: </Typography>
-                    <Slider defaultValue={20} step={5} min={5} max={100} style={{color:"black"}}
-                        aria-labelledby="barAmount-slider" valueLabelDisplay="auto"
-                        // marks 
-                        onChangeCommitted={(event, value) => updateBarAmount(value)}
-                        />
-                </div>
+                
                 <div id="speedSet-slider-container">
                     <Typography id="speedSet-slider" gutterBottom> Visulaizer Speed: </Typography>
                     <Slider defaultValue={1} step={0.2} min={0.2} max={3} style={{color:"black"}}
@@ -71,14 +65,19 @@ const ControlBar = (props) => {
                         onChangeCommitted={(event, value) => updateSortingSpeed(value)}
                         />
                 </div>
-           </div>
 
-           <div id="controlBar-sortGo-center">
-                {/* <Fab variant="extended" color="primary" aria-label="add"> <NavigationIcon /> Sort! </Fab> */}
-                <Button variant="contained" style={{ width:'250px', height:'5vh'}} onClick={generateNewBars}> Create New Array </Button>
-                <Button variant="contained" style={{ width:'250px', height:'5vh'}}> Sort! </Button>
-                
-            </div>
+                <div id="barAmount-slider-container">
+                    <Typography id="barAmount-slider" gutterBottom> Bar Amount: </Typography>
+                    <Slider defaultValue={20} step={5} min={5} max={100} style={{color:"black"}}
+                        aria-labelledby="barAmount-slider" valueLabelDisplay="auto"
+                        // marks 
+                        onChangeCommitted={(event, value) => updateBarAmount(value)}
+                        />
+                </div>
+
+                <Button variant="contained" onClick={generateNewBars}> Create New Array </Button>
+
+           </div>
 
            <div id="controlBar-chooseSortAlgo-right">
                 <FormControl>
@@ -92,7 +91,9 @@ const ControlBar = (props) => {
                     </NativeSelect>
                     <FormHelperText>Pick an algorithem</FormHelperText>
                 </FormControl>
-                {/* <Button variant="contained" style={{backgroundColor:'#3498db', width:'250px', height:'5vh'}}> Merge Algo! </Button> */}
+                
+                <Button variant="contained"> Sort! </Button>
+
             </div>
 
        </div>
