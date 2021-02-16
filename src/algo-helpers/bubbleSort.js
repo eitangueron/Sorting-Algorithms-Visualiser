@@ -1,7 +1,18 @@
-// export default bubbleSort = (unSortedArray) => {
-//     for(let i=1; i<unSortedArray.length; i++){
-//         for(let j=0; j<)
-//     }
+// export default 
+const bubbleSort = (unSortedArr) => {
+    const motions = []
+    // {bar1:"",bar2:"",swap:true}
+    const arr = [...unSortedArr]
+    for(let i=0; i<arr.length; i++){
+        for(let j=i+1; j<arr.length; j++){
+            if(arr[i] > arr[j]){
+                let temp = arr[i]
+                arr[i]=arr[j]
+                arr[j]=temp
+            }
+        }
+    }
+    return [arr,motions]
+}
 
-//     return [sortedArray,motions]
-// }
+// console.log( bubbleSort([2,5,4,3,4,55,66,111,3332,4,3]) )
