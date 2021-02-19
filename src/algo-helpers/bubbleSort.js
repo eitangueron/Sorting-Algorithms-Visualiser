@@ -1,4 +1,4 @@
-export default bubbleSort
+// export default bubbleSort
 const bubbleSort = (unSortedArr) => {
     const motions = []
     // {bar1:"",bar2:"",swapped:true}
@@ -18,5 +18,6 @@ const bubbleSort = (unSortedArr) => {
     return {arr:arr,motions:motions}
 }
 
+export default bubbleSort;
 
 // console.log( bubbleSort([2,5,4,3,4,55,66,111,3332,4,3]) )
