@@ -6,13 +6,13 @@ const bubbleSort = (unSortedArr) => {
     for(let i=0; i<arr.length; i++){
         for(let j=i+1; j<arr.length; j++){
             let swapped=false
-            if(arr[i] > arr[j]){
+            if(arr[i].num > arr[j].num){
                 swapped = true
                 let temp = arr[i]
                 arr[i]=arr[j]
                 arr[j]=temp
             }
-            motions.push({bar1:arr[i], bar2:arr[j],swap:swapped})
+            motions.push({bar1Index:i, bar2Index:j,swapped:swapped})
         }
     }
     return {arr:arr,motions:motions}
