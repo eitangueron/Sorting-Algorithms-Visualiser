@@ -7,12 +7,11 @@ import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
 // import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import FormHelperText from '@material-ui/core/FormHelperText';
+// import FormHelperText from '@material-ui/core/FormHelperText';
 import AppBar from '@material-ui/core/AppBar';
 import InputLabel from '@material-ui/core/InputLabel';
 
-
-
+import bubbleSort from '../algo-helpers/bubbleSort'
 import './styles/control-bar.css';
 
 const ControlBar = (props) => {
@@ -26,7 +25,7 @@ const ControlBar = (props) => {
         let newNums = [] 
         for(let i=0; i<numsAmmount; i++){
             let newNum = getRandomNum(minNumsRange,maxNumsRange)
-            newNums.push(newNum)
+            newNums.push({num:newNum, selected:false, swapped:false})
         }
         setNumsArray([...newNums])
     }
@@ -34,7 +33,7 @@ const ControlBar = (props) => {
         createRandomNumsArray(data.barAmount, data.minBarSize, data.maxBarSize)
     }
     
-    ///
+    /// data setters:
     const setNumsArray = (newArray) => {
         props.setData({...data, numsArray: newArray})
     }
@@ -43,15 +42,61 @@ const ControlBar = (props) => {
     const updateBarAmount = (value) => {
         props.setData({...data, barAmount:value})
     }
-
     const updateSortingSpeed = (value) => {
         props.setData({...data, sortSpeed:value})
     }
-
     const updateCurrentAlgo = (value) => {
-        // props.setData({...data, sortSpeed:value})
+        props.setData({...data, currentAlgo:value})
     }
-    
+// eslint-disable-next-line
+    const allBarsGreenEffect = (barsArr) => {
+
+    }
+  
+    const sort = (motions,index,newBarsArray) => {
+        if(index===motions.length){ return }      //stop recurssion
+        // const sortedBarsData = bubbleSort(data.numsArray)   //retrive motions
+        // const newBarsArray = [...data.numsArray]
+        const action = motions[index]
+        const bar1 = action.bar1Index
+        const bar2 = action.bar2Index
+        
+        // console.log(action)
+
+        newBarsArray[bar1].selected = true 
+        newBarsArray[bar2].selected = true
+        setNumsArray(newBarsArray)   //show current comapre - purple light
+
+        setTimeout(()=>{
+            newBarsArray[bar1].selected = false
+            newBarsArray[bar2].selected = false
+            if(action.swapped){
+                let temp = newBarsArray[bar1]   //swap
+                newBarsArray[bar1]=newBarsArray[bar2]
+                newBarsArray[bar2]=temp
+                newBarsArray[bar1].swapped = true
+                newBarsArray[bar2].swapped = true
+                setNumsArray(newBarsArray)  //swapped - show green light
+                setTimeout(()=>{            
+                    newBarsArray[bar1].swapped = false
+                    newBarsArray[bar2].swapped = false
+                    setNumsArray(newBarsArray)  // turn off green light
+                },500)
+            }
+        },500)
+        setNumsArray(newBarsArray)  // turn off purple light
+
+        setTimeout( () => {
+            sort(motions,index+1,newBarsArray)
+        }, 500);
+    }
+    // setNumsArray(sortedBarsData.arr)
+
+    const sortingIt = () => {
+        const sortedBarsData = bubbleSort(data.numsArray)   //retrive motions
+        const numsArray = [...data.numsArray]
+        sort(sortedBarsData.motions,0,numsArray)
+    }
 
     return (
         <AppBar position="static">
@@ -88,14 +133,16 @@ const ControlBar = (props) => {
                     onChange={(event) => updateCurrentAlgo(event.target.value)}
                     // value={state.age} name="age" className={classes.selectEmpty} inputProps={{ 'aria-label': 'age' }}
                     >
+                    <option value="bubbleSort">Bubble sort</option>
                     <option value="mergeSort">Merge sort</option>
                     <option value="quickSort">Quick sort</option>
-                    <option value="bubbleSort">Bubble sort</option>
                     </NativeSelect>
                     {/* <FormHelperText>Pick an algorithem</FormHelperText> */}
                 </FormControl>
                 
-                <Button variant="contained" style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}> Sort! </Button>
+                <Button variant="contained" style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}
+                onClick={sortingIt}
+                > Sort! </Button>
 
             </div>
 
