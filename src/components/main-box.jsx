@@ -14,17 +14,16 @@ const MainBox = (props) => {
        <div id="main-box" style={{
        gridTemplateColumns: `repeat(${data.barAmount}, 1fr)`
         }}>
-            {data.numsArray.map( (numInfo,k) => 
-                <Tooltip title={numInfo.num} key={`bar-tooltip ${numInfo.num} / ${k}`}>
-                <div className="bar" key={`bar ${numInfo.num} / ${k}`} 
+            {data.numsArray.map( (num,k) => 
+                <Tooltip title={num} key={`bar-tooltip ${num} / ${k}`}>
+                <div className="bar" key={`bar ${num} / ${k}`} 
                     style={{
                     width:`calc(95vh / (${data.barAmount}))`, 
-                    height:`${numInfo.num*0.089}vh`,
-                    top:`calc(88vh - ${numInfo.num*0.089}vh)`,
-                    backgroundColor: numInfo.selected? "purple" : numInfo.swapped? "green" : "#3498db"
+                    height:`${num*0.089}vh`,
+                    top:`calc(88vh - ${num*0.089}vh)`,
                 }}>
-                {data.barAmount <=30 ? 
-                    <span className="bar-size">{numInfo.num}</span> : null}
+                {data.barAmount <=30 ?
+                    <span className="bar-size">{num}</span> : null}
                 </div>
                 </Tooltip>)
             }
