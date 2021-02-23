@@ -25,7 +25,7 @@ const ControlBar = (props) => {
         let newNums = [] 
         for(let i=0; i<numsAmmount; i++){
             let newNum = getRandomNum(minNumsRange,maxNumsRange)
-            newNums.push({num:newNum, selected:false, swapped:false})
+            newNums.push(newNum)
         }
         setNumsArray([...newNums])
     }
@@ -49,53 +49,49 @@ const ControlBar = (props) => {
         props.setData({...data, currentAlgo:value})
     }
 // eslint-disable-next-line
-    const allBarsGreenEffect = (barsArr) => {
+    const allBarsSortedEffect = (barsArr) => {
 
     }
-  
-    const sort = (motions,index,newBarsArray) => {
-        if(index===motions.length){ return }      //stop recurssion
-        // const sortedBarsData = bubbleSort(data.numsArray)   //retrive motions
-        // const newBarsArray = [...data.numsArray]
-        const action = motions[index]
-        const bar1 = action.bar1Index
-        const bar2 = action.bar2Index
-        
-        // console.log(action)
 
-        newBarsArray[bar1].selected = true 
-        newBarsArray[bar2].selected = true
-        setNumsArray(newBarsArray)   //show current comapre - purple light
+    const sort = () => {
+        const sortedBarsData = bubbleSort(data.numsArray)   //retrive animations
+        const motions = sortedBarsData.motions
+        for( let i=0; i<motions.length; i++){
+            const bars = document.getElementsByClassName("bar")
+            const barsInnerText = document.getElementsByClassName("bar-size")
+            const action = motions[i]
+            const bar1 = action.bar1Index
+            const bar2 = action.bar2Index
+            const bar1Style = bars[bar1].style
+            const bar2Style = bars[bar2].style
+            if(i%2===0){        //select
+                setTimeout( () => {
+                    bar1Style.backgroundColor = "yellow"
+                    bar2Style.backgroundColor = "yellow"
+                },i*data.sortSpeed)
+            } else {
+                setTimeout( () => {
+                    bar1Style.backgroundColor = "#3498db"
+                    bar2Style.backgroundColor = "#3498db"
+                    if(action.swapped){     //swap height
+                        let temp = bar1Style.height
+                        bar1Style.height = bar2Style.height
+                        bar2Style.height = temp
 
-        setTimeout(()=>{
-            newBarsArray[bar1].selected = false
-            newBarsArray[bar2].selected = false
-            if(action.swapped){
-                let temp = newBarsArray[bar1]   //swap
-                newBarsArray[bar1]=newBarsArray[bar2]
-                newBarsArray[bar2]=temp
-                newBarsArray[bar1].swapped = true
-                newBarsArray[bar2].swapped = true
-                setNumsArray(newBarsArray)  //swapped - show green light
-                setTimeout(()=>{            
-                    newBarsArray[bar1].swapped = false
-                    newBarsArray[bar2].swapped = false
-                    setNumsArray(newBarsArray)  // turn off green light
-                },500)
-            }
-        },500)
-        setNumsArray(newBarsArray)  // turn off purple light
+                        if(data.barAmount<=30){     //num visable - updatding values
+                            let tempNum = barsInnerText[bar1].textContent
+                            barsInnerText[bar1].textContent = barsInnerText[bar2].textContent
+                            barsInnerText[bar2].textContent = tempNum
+                        }
 
-        setTimeout( () => {
-            sort(motions,index+1,newBarsArray)
-        }, 500);
-    }
-    // setNumsArray(sortedBarsData.arr)
+                    }
+                    },i*data.sortSpeed)
+                }
+        }
 
-    const sortingIt = () => {
-        const sortedBarsData = bubbleSort(data.numsArray)   //retrive motions
-        const numsArray = [...data.numsArray]
-        sort(sortedBarsData.motions,0,numsArray)
+        setTimeout( () => {     //tooltips critical
+            setNumsArray(sortedBarsData.sortedArr)
+        }, motions.length*data.sortSpeed)
     }
 
     return (
@@ -106,7 +102,7 @@ const ControlBar = (props) => {
                 
                 <div id="speedSet-slider-container">
                     <Typography id="speedSet-slider" gutterBottom> Visulaizer Speed: </Typography>
-                    <Slider defaultValue={1} step={0.2} min={0.2} max={3} style={{color:"black"}}
+                    <Slider defaultValue={10} step={3} min={3} max={21} style={{color:"black"}}
                         aria-labelledby="speedSet-slider" valueLabelDisplay="auto"
                         // marks 
                         onChangeCommitted={(event, value) => updateSortingSpeed(value)}
@@ -141,7 +137,7 @@ const ControlBar = (props) => {
                 </FormControl>
                 
                 <Button variant="contained" style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}
-                onClick={sortingIt}
+                onClick={sort}
                 > Sort! </Button>
 
             </div>

@@ -10,12 +10,10 @@ const App = observer((props) => {
   const [data, setData] = useState({
     numsArray:[],
     barAmount:20,
-    sortSpeed:1.0,
-    minBarSize:100,
+    sortSpeed:10,
+    minBarSize:50,
     maxBarSize:1000,
     currentAlgo:"bubbleSort",
-    sorting:false,
-    sortingMotions:[]
   },)
 
   // setNumsArray={setNumsArray} updateBarAmount={updateBarAmount}
