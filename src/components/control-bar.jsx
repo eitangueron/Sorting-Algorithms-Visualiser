@@ -32,6 +32,22 @@ const ControlBar = (props) => {
     const generateNewBars = () => {
         createRandomNumsArray(data.barAmount, data.minBarSize, data.maxBarSize)
     }
+
+    const convertBarAmountToSpeed = (barAmount) => {
+        if(barAmount>80){
+            return 1
+        } else if (barAmount>60){
+            return 4
+        } else if(barAmount>40){
+            return 8
+        } else if(barAmount>20){
+            return 12
+        } else if (barAmount>5){
+            return 16
+        } else {
+            return 20
+        }
+    }
     
     /// data setters:
     const setNumsArray = (newArray) => {
@@ -40,17 +56,13 @@ const ControlBar = (props) => {
     useEffect(generateNewBars, [data.barAmount])
 
     const updateBarAmount = (value) => {
-        props.setData({...data, barAmount:value})
+        props.setData({...data, barAmount:value, sortSpeed:convertBarAmountToSpeed(value)})
     }
     const updateSortingSpeed = (value) => {
         props.setData({...data, sortSpeed:value})
     }
     const updateCurrentAlgo = (value) => {
         props.setData({...data, currentAlgo:value})
-    }
-// eslint-disable-next-line
-    const allBarsSortedEffect = (barsArr) => {
-
     }
 
     const sort = () => {
@@ -102,11 +114,13 @@ const ControlBar = (props) => {
                 
                 <div id="speedSet-slider-container">
                     <Typography id="speedSet-slider" gutterBottom> Visulaizer Speed: </Typography>
-                    <Slider defaultValue={10} step={3} min={3} max={21} style={{color:"black"}}
-                        aria-labelledby="speedSet-slider" valueLabelDisplay="auto"
-                        // marks 
-                        onChangeCommitted={(event, value) => updateSortingSpeed(value)}
-                        />
+                    <Slider defaultValue={12} step={4} min={1} max={20} style={{color:"black"}}
+                    aria-labelledby="speedSet-slider" 
+                    // track="inverted"
+                    onChangeCommitted={(event, value) => updateSortingSpeed(value)}
+                    value={data.sortSpeed}
+                    disabled={data.running}
+                    />
                 </div>
 
                 <div id="barAmount-slider-container">
