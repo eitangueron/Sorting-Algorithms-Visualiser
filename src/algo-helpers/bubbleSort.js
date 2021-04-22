@@ -1,24 +1,36 @@
 // export default bubbleSort
-const bubbleSort = (unSortedArr) => {
+//recives an unsorted ints arr and sortes it using bubble sort algorhtim
+const bubbleSort = (arr) => {
     const motions = []
     // {bar1:"",bar2:"",swapped:true}
-    const arr = [...unSortedArr]
-    for(let i=0; i<arr.length; i++){
-        for(let j=i+1; j<arr.length; j++){
-            motions.push({bar1Index:i, bar2Index:j})
-            let swapped=false
-            if(arr[i] > arr[j]){
+    const arrLen = arr.length
+    let sorted = false
+    for (let i = 0; i < arrLen; i++) {
+        if (sorted) {
+            // console.log(arr)
+            return {sortedArr:arr,motions:motions}
+        } else {
+            sorted = true
+        }
+        for (let j = 0; j < arrLen-i -1; j++) {
+            motions.push({bar1Index:j, bar2Index:j+1})
+            let swapped = false
+            if (arr[j] > arr[j + 1]) {
+                swap(j,j+1,arr)
                 swapped = true
-                let temp = arr[i]
-                arr[i]=arr[j]
-                arr[j]=temp
+                sorted = false
             }
-            motions.push({bar1Index:i, bar2Index:j,swapped:swapped})
+            motions.push({bar1Index:j, bar2Index:j+1,swapped:swapped})
         }
     }
-    return {sortedArr:arr,motions:motions}
+}
+
+const swap = (i, j, arr) => {
+    let temp = arr[j]
+    arr[j] = arr[i]
+    arr[i] = temp
 }
 
 export default bubbleSort;
 
-// console.log( bubbleSort([2,5,4,3,4,55,66,111,3332,4,3]) )
+console.log(bubbleSort([2,65,23,43,2222,33,25,3]))
