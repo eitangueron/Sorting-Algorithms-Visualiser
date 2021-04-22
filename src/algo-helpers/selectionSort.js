@@ -1,13 +1,14 @@
 // export default bubbleSort
-const insertionSort = (unSortedArr) => {
+const selectionSort = (unSortedArr) => {
     const motions = []
     // {bar1:"",bar2:"",swapped:true}
     const arr = [...unSortedArr]
     for(let i=0; i<arr.length; i++){
+        let min = arr[i]
         for(let j=i+1; j<arr.length; j++){
             motions.push({bar1Index:i, bar2Index:j})
             let swapped=false
-            if(arr[i] > arr[j]){
+            if(arr[j] < min){
                 swapped = true
                 let temp = arr[i]
                 arr[i]=arr[j]
@@ -19,6 +20,6 @@ const insertionSort = (unSortedArr) => {
     return {sortedArr:arr,motions:motions}
 }
 
-// export default insertionSort;
+// export default selectionSort;
 
-console.log( insertionSort([2,5,4,3,4,55,66,111,3332,4,3]) )
+console.log( selectionSort([2,5,4,3,4,55,66,111,3332,4,3]) )
