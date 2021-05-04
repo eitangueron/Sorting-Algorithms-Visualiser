@@ -1,27 +1,31 @@
 //recives an unsorted ints arr and sortes it using bubble sort algorhtim
 const bubbleSort = (arr) => {
-    const arrLen = arr.length
+    const animations = []
     let sorted = false
-    for (let i = 0; i < arrLen; i++) {
+    const len = arr.length
+    for (let i = 0; i < len; i++) {
         if (sorted) {
-            return {sortedArr:arr,motions:motions}      //template for main
-        } else {
-            sorted = true
+            return {
+                sortedArr: arr,
+                animations: animations
+            }                           //according to template for main
         }
-        for (let j = 0; j < arrLen-i -1; j++) {
-            motions.push({bar1Index:j, bar2Index:j+1})      //amination
+        sorted = true
+        for (let j = 0; j < len - i - 1; j++) {
+            animations.push([j,j+1]) //indexes compared - marking
+            animations.push([j,j+1]) //indexes compared - unmarking
             let swapped = false
             if (arr[j] > arr[j + 1]) {
-                swap(j,j+1,arr)
-                swapped = true
+                swap(arr, j, j + 1)
                 sorted = false
+                swapped = true
             }
-            motions.push({bar1Index:j, bar2Index:j+1,swapped:swapped})  //amination
+            animations.push([j,j+1,swapped]) //indexes compared - swapping
         }
     }
 }
 
-const swap = (i, j, arr) => {
+const swap = (arr, i, j) => {
     let temp = arr[j]
     arr[j] = arr[i]
     arr[i] = temp

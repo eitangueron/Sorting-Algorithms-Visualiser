@@ -1,30 +1,61 @@
 //recives an unsorted ints arr and sortes it using bubble sort algorhtim
-const motions = []
+const animations = []
 
-const mergeSort = (arr) => {
-    const mid = arr.length/2
-    if(arr.length < 2 ){ return arr}
-    const left = arr.splice(0,mid)
-    return merge(mergeSort(left), mergeSort(arr))
-}
-
-const merge = (left, right) => {
-    const mergedArr = []
-    while(left.length && right.length){
-        if(left[0] < right[0]){
-            mergedArr.push(left.shift())
-        } else {
-            mergedArr.push(right.shift()) 
-        }
+const mergeSort = (arr, l = 0, r = arr.length - 1) => {
+    if (l < r) {
+        let m = Math.floor(l + (r - l) / 2)
+        mergeSort(arr, l, m)
+        mergeSort(arr, m + 1, r)
+        merge(arr, l, m, r)
     }
-    return [...mergedArr, ...left, ...right]
+    return {
+        sortedArr: arr,
+        animations: animations
+    }
 }
 
-// return {sortedArr:arr,motions:motions}      //template for main
-// motions.push({bar1Index:j, bar2Index:j+1})      //amination
-// motions.push({bar1Index:j, bar2Index:j+1,swapped:swapped})  //amination
+const merge = (arr, l, m, r) => {
+    const L = arr.slice(l, m + 1) //IMPORTANT - until M including! (divide correctly)
+    const R = arr.slice(m + 1, r + 1)
+    let k = l,
+        i = 0,
+        j = 0
+    while (i < L.length && j < R.length) {
+        animations.push([l+i,m+j]) //indexes compared - marking
+        animations.push([l+i,m+j]) //indexes compared - unmarking
+        if (L[i] <= R[j]) {
+            arr[k] = L[i]
+            animations.push([k,L[i],true]) //indexes compared - swapping?
+            i++
+        } else {
+            arr[k] = R[j]
+            animations.push([k,R[j],true]) //indexes compared - swapping?
+            j++
+        }
+        k++
+    }
+    while (i < L.length) {
+        animations.push([l+i,m+j]) //indexes compared - marking
+        animations.push([l+i,m+j]) //indexes compared - unmarking
+        animations.push([k,L[i],true]) //indexes compared - swapping?
+        arr[k] = L[i]
+        i++
+        k++
+    }
+    while (j < R.length) {
+        animations.push([l+i,m+j]) //indexes compared - marking
+        animations.push([l+i,m+j]) //indexes compared - unmarking
+        animations.push([k,R[j],true]) //indexes compared - swapping?
+        arr[k] = R[j]
+        j++
+        k++
+    }
+}
 
-// export default mergeSort;
+export default mergeSort;
 
 //tester:
-console.log(mergeSort([2,65,23,43,2222,33,25,3]))
+const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
+console.log(
+    mergeSort(testArr))
+// console.log(testArr)
