@@ -25,11 +25,11 @@ const merge = (arr, l, m, r) => {
         animations.push([l+i,m+j]) //indexes compared - unmarking
         if (L[i] <= R[j]) {
             arr[k] = L[i]
-            animations.push([k,L[i],true]) //indexes compared - swapping?
+            animations.push([k,L[i]]) //commit change - [index, new value]
             i++
         } else {
             arr[k] = R[j]
-            animations.push([k,R[j],true]) //indexes compared - swapping?
+            animations.push([k,R[j]]) //commit change - [index, new value]
             j++
         }
         k++
@@ -37,7 +37,7 @@ const merge = (arr, l, m, r) => {
     while (i < L.length) {
         animations.push([l+i,m+j]) //indexes compared - marking
         animations.push([l+i,m+j]) //indexes compared - unmarking
-        animations.push([k,L[i],true]) //indexes compared - swapping?
+        animations.push([k,L[i]]) //commit change - [index, new value]
         arr[k] = L[i]
         i++
         k++
@@ -45,8 +45,8 @@ const merge = (arr, l, m, r) => {
     while (j < R.length) {
         animations.push([l+i,m+j]) //indexes compared - marking
         animations.push([l+i,m+j]) //indexes compared - unmarking
-        animations.push([k,R[j],true]) //indexes compared - swapping?
-        arr[k] = R[j]
+        animations.push([k,R[j]]) //commit change - [index, new value]
+        arr[k] = R[j]           
         j++
         k++
     }
