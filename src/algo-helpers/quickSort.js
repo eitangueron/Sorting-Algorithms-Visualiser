@@ -1,5 +1,5 @@
-//recives an unsorted ints arr and sortes it using bubble sort algorhtim
-// const animations = []
+// recives an unsorted ints arr and sortes it using quick sort algorhtim 
+// returns an obbject with the sorted array and the animations commands for the visualiztation
 
 const quickSort = (arr, l = 0, r = arr.length - 1, animations = []) => {
     if (l < r) {
@@ -22,16 +22,16 @@ const partition = (arr, l, r, animations) => {
         if (arr[i] < pivot) {
             k++
             swap(arr, k, i)
-            animations.push([i, k, true]) //indexes compared - swapping
+            animations.push([i, k, true]) //indexes compared - swapping values if true
         } else {
-            animations.push([i, i, false]) //indexes compared - swapping
+            animations.push([i, i, false]) //indexes compared - swapping values if true
         }
     }
     k++
     swap(arr, k, r)
-    animations.push([k, r]) //indexes compared - marking
-    animations.push([k, r]) //indexes compared - unmarking
-    animations.push([k, r, true]) //indexes compared - swapping
+    animations.push([k, r])
+    animations.push([k, r])
+    animations.push([k, r, true])
     return k
 }
 
