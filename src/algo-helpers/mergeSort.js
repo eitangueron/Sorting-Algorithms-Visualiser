@@ -1,12 +1,12 @@
 //recives an unsorted ints arr and sortes it using bubble sort algorhtim
-const animations = []
+// const animations = []
 
-const mergeSort = (arr, l = 0, r = arr.length - 1) => {
+const mergeSort = (arr, l = 0, r = arr.length - 1, animations=[]) => {
     if (l < r) {
         let m = Math.floor(l + (r - l) / 2)
-        mergeSort(arr, l, m)
-        mergeSort(arr, m + 1, r)
-        merge(arr, l, m, r)
+        mergeSort(arr, l, m, animations)
+        mergeSort(arr, m + 1, r, animations)
+        merge(arr, l, m, r, animations)
     }
     return {
         sortedArr: arr,
@@ -14,7 +14,7 @@ const mergeSort = (arr, l = 0, r = arr.length - 1) => {
     }
 }
 
-const merge = (arr, l, m, r) => {
+const merge = (arr, l, m, r, animations) => {
     const L = arr.slice(l, m + 1) //IMPORTANT - until M including! (divide correctly)
     const R = arr.slice(m + 1, r + 1)
     let k = l,

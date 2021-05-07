@@ -1,11 +1,11 @@
 //recives an unsorted ints arr and sortes it using bubble sort algorhtim
-const animations = []
+// const animations = []
 
-const quickSort = (arr, l = 0, r = arr.length - 1) => {
+const quickSort = (arr, l = 0, r = arr.length - 1,animations=[]) => {
     if (l < r) {
-        let p = partition(arr, l, r)
-        quickSort(arr, l, p - 1)
-        quickSort(arr, p + 1, r)
+        let p = partition(arr, l, r,animations)
+        quickSort(arr, l, p - 1,animations)
+        quickSort(arr, p + 1, r,animations)
     }
     return {
         sortedArr: arr,
@@ -13,7 +13,7 @@ const quickSort = (arr, l = 0, r = arr.length - 1) => {
     }
 }
 
-const partition = (arr, l, r) => {
+const partition = (arr, l, r,animations) => {
     const pivot = arr[r]
     let k = l - 1
     for (let i = l; i < r; i++) {
