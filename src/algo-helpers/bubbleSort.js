@@ -8,19 +8,19 @@ const bubbleSort = (arr) => {
             return {
                 sortedArr: arr,
                 animations: animations
-            }                           //according to template for main
+            } //according to template for main
         }
         sorted = true
         for (let j = 0; j < len - i - 1; j++) {
-            animations.push([j,j+1]) //indexes compared - marking
-            animations.push([j,j+1]) //indexes compared - unmarking
+            animations.push([j, j + 1]) //indexes compared - marking
+            animations.push([j, j + 1]) //indexes compared - unmarking
             let swapped = false
             if (arr[j] > arr[j + 1]) {
                 swap(arr, j, j + 1)
                 sorted = false
                 swapped = true
             }
-            animations.push([j,j+1,swapped]) //indexes compared - swapping
+            animations.push([j, j + 1, swapped]) //indexes compared - swapping
         }
     }
 }

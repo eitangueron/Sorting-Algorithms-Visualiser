@@ -1,11 +1,11 @@
 //recives an unsorted ints arr and sortes it using bubble sort algorhtim
 // const animations = []
 
-const quickSort = (arr, l = 0, r = arr.length - 1,animations=[]) => {
+const quickSort = (arr, l = 0, r = arr.length - 1, animations = []) => {
     if (l < r) {
-        let p = partition(arr, l, r,animations)
-        quickSort(arr, l, p - 1,animations)
-        quickSort(arr, p + 1, r,animations)
+        let p = partition(arr, l, r, animations)
+        quickSort(arr, l, p - 1, animations)
+        quickSort(arr, p + 1, r, animations)
     }
     return {
         sortedArr: arr,
@@ -13,25 +13,25 @@ const quickSort = (arr, l = 0, r = arr.length - 1,animations=[]) => {
     }
 }
 
-const partition = (arr, l, r,animations) => {
+const partition = (arr, l, r, animations) => {
     const pivot = arr[r]
     let k = l - 1
     for (let i = l; i < r; i++) {
-        animations.push([i,r]) //indexes compared - marking
-        animations.push([i,r]) //indexes compared - unmarking
+        animations.push([i, r]) //indexes compared - marking
+        animations.push([i, r]) //indexes compared - unmarking
         if (arr[i] < pivot) {
             k++
             swap(arr, k, i)
-            animations.push([i,k,true]) //indexes compared - swapping
+            animations.push([i, k, true]) //indexes compared - swapping
         } else {
-            animations.push([i,i,false]) //indexes compared - swapping
+            animations.push([i, i, false]) //indexes compared - swapping
         }
     }
     k++
     swap(arr, k, r)
-    animations.push([k,r]) //indexes compared - marking
-    animations.push([k,r]) //indexes compared - unmarking
-    animations.push([k,r,true]) //indexes compared - swapping
+    animations.push([k, r]) //indexes compared - marking
+    animations.push([k, r]) //indexes compared - unmarking
+    animations.push([k, r, true]) //indexes compared - swapping
     return k
 }
 
