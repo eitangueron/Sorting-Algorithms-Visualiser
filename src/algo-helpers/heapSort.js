@@ -56,7 +56,5 @@ const swap = (arr, i, j) => {
 export default heapSort;
 
 //tester:
-const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
-console.log(
-    heapSort(testArr))
-// console.log(testArr)
+// const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
+// console.log( heapSort(testArr))

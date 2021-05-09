@@ -14,10 +14,9 @@ const App = observer((props) => {
     minBarSize:50,
     maxBarSize:1000,
     currentAlgo:"bubbleSort",
-    running:false
+    isRunning:false
   },)
 
-  // setNumsArray={setNumsArray} updateBarAmount={updateBarAmount}
   return (
       <div>
         <ControlBar data={data} setData={setData} />

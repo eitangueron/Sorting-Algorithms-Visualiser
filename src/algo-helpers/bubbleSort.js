@@ -36,4 +36,5 @@ const swap = (arr, i, j) => {
 export default bubbleSort;
 
 //tester:
-console.log(bubbleSort([2,65,23,43,2222,33,25,3]))
+// const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
+// console.log( bubbleSort(testArr))

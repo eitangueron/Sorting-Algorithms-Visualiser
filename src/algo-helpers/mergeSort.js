@@ -57,7 +57,5 @@ const merge = (arr, l, m, r, animations) => {
 export default mergeSort;
 
 //tester:
-const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
-console.log(
-    mergeSort(testArr))
-// console.log(testArr)
+// const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
+// console.log( mergeSort(testArr))

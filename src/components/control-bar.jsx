@@ -12,10 +12,11 @@ import mergeSort from '../algo-helpers/mergeSort'
 import quickSort from '../algo-helpers/quickSort'
 import heapSort from '../algo-helpers/heapSort'
 
-const algos = {bubbleSort:bubbleSort, mergeSort:mergeSort, quickSort:quickSort, heapSort:heapSort}
 
 const ControlBar = (props) => {
     
+    const algos = {bubbleSort:bubbleSort, mergeSort:mergeSort, quickSort:quickSort, heapSort:heapSort}
+
     const data = props.data
 
     /// Data setters:
@@ -23,17 +24,14 @@ const ControlBar = (props) => {
         props.setData({...data, numsArray: newArray})
     }
 
-    const updateBarAmount = (value) => {
-        props.setData({...data, barAmount:value, sortSpeed:convertBarAmountToSpeed(value)})
-    }
+    const setIsRunning = (state) => { props.setData({...data, isRunning: state}) }
+    const diableControlButtons = (state) => { setIsRunning(state) }
 
-    const updateSortingSpeed = (value) => {
-        props.setData({...data, sortSpeed:value})
-    }
+    const updateBarAmount = (value) => { props.setData({...data, barAmount:value, sortSpeed:convertBarAmountToSpeed(value)}) }
 
-    const updateCurrentAlgo = (value) => {
-        props.setData({...data, currentAlgo:value})
-    }
+    const updateSortingSpeed = (value) => { props.setData({...data, sortSpeed:value}) }
+
+    const updateCurrentAlgo = (value) => { props.setData({...data, currentAlgo:value}) }
 
 
     /// Helpers:
@@ -63,7 +61,9 @@ const ControlBar = (props) => {
 
 
     const sort = () => {
-        const { sortedArr, animations } = algos[data.currentAlgo](data.numsArray)   //retrive animations and sorted bars array
+        // sortBtnRef.current.disabled = true; 
+        diableControlButtons(true)
+        const { sortedArr, animations } = algos[data.currentAlgo]([...data.numsArray])   //retrive animations and sorted bars array
         for( let i=0; i<animations.length; i++){
             const bars = document.getElementsByClassName("bar")
             const barsInnerText = document.getElementsByClassName("bar-size")
@@ -108,58 +108,65 @@ const ControlBar = (props) => {
             }
         }
         setTimeout( () => {     //critical for updating tooltips
+            diableControlButtons(false)
             setNumsArray(sortedArr)
         }, animations.length*data.sortSpeed)
     }
 
-
+    const marks = [{ value: 10, label: 'Fast'} , { value: 200, label: 'Slow'}]
+    
     return (
         <AppBar position="static">
        <div id="controlBar-container">
-
+ 
            <div id="controlBar-setters-left">
                 
                 <div id="speedSet-slider-container">
                     <Typography id="speedSet-slider" gutterBottom> Visulaizer Speed: </Typography>
                     <Slider defaultValue={30} step={20} min={10} max={200} style={{color:"black"}}
                     aria-labelledby="speedSet-slider" 
-                    // track="inverted"
+                    disabled={data.isRunning ? true : null}
                     onChangeCommitted={(event, value) => updateSortingSpeed(value)}
                     value={data.sortSpeed}
-                    disabled={data.running}
+                    // scale={(x) => x ** 10}
+                    // marks={marks}
+                    // track="inverted"
                     />
                 </div>
 
                 <div id="barAmount-slider-container">
                     <Typography id="barAmount-slider" gutterBottom> Bar Amount: </Typography>
                     <Slider defaultValue={20} step={5} min={5} max={100} style={{color:"black"}}
-                        aria-labelledby="barAmount-slider" valueLabelDisplay="auto"
-                        // marks 
+                        aria-labelledby="barAmount-slider" valueLabelDisplay="auto"     // marks 
+                        disabled={data.isRunning ? true : null}
                         onChange={(event, value) => updateBarAmount(value)}
                         />
                 </div>
 
-                <Button variant="contained" onClick={generateNewBars} style={{background:"white", fontSize:"16px", fontWeight:'bold', textTransform:"none", lineHeight:"1.3"}}> Create New Bars </Button>
+                <Button onClick={generateNewBars} disabled={data.isRunning ? true : null} variant="contained"
+                style={{background:"white", fontSize:"16px", fontWeight:'bold', textTransform:"none", lineHeight:"1.3"}} 
+                > Create New Bars 
+                </Button>
 
            </div>
 
            <div id="controlBar-chooseSortAlgo-right">
                 <FormControl>
-                <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithem</InputLabel>
+                    <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithem</InputLabel>
                     <NativeSelect 
-                    onChange={(event) => updateCurrentAlgo(event.target.value)}
-                    >
+                    disabled={data.isRunning ? true : null}
+                    onChange={(event) => updateCurrentAlgo(event.target.value)}>
                     <option value="bubbleSort">Bubble sort</option>
                     <option value="heapSort">Heap sort</option>
                     <option value="mergeSort">Merge sort</option>
                     <option value="quickSort">Quick sort</option>
-                    {/* <option value="insertionSort">Insertion sort</option> */}
                     </NativeSelect>
                 </FormControl>
                 
-                <Button variant="contained" style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}
-                onClick={sort}
-                > Sort! </Button>
+                <Button  onClick={sort} disabled={data.isRunning ? true : null} variant="contained"
+                style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}
+                > Sort! 
+                </Button>
 
             </div>
 

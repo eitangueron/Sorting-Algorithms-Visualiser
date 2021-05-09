@@ -45,7 +45,5 @@ const swap = (arr, i, j) => {
 export default quickSort;
 
 //tester:
-const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
-console.log(quickSort(testArr))
-// quickSort(testArr)
-// console.log(testArr)
+// const testArr = [2, 65, 23, 43, 222, 33, 25, 3]
+// console.log(quickSort(testArr))
