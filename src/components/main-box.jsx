@@ -5,11 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 const MainBox = (props) => {
     
     const data = props.data
-
-    // useEffect( () => {
-
-    // },[data.sortingMotions])
-
+    
     return (
        <div id="main-box" style={{
        gridTemplateColumns: `repeat(${data.barAmount}, 1fr)`
