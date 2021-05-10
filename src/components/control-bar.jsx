@@ -50,8 +50,6 @@ const ControlBar = (props) => {
 
     useEffect(generateNewBars, [data.barAmount])
 
-    let name 
-
     const sort = () => {
         const sortBtn = document.getElementById("sortBtn")
         sortBtn.textContent = "Reset"
@@ -87,9 +85,6 @@ const ControlBar = (props) => {
                         const bar1Style = bars[bar1].style
                         const bar2Style = bars[bar2].style
                         setTimeout( () => {   
-                            if(name=="eitan")  {
-                                console.log(name)
-                            }
                             let temp = bar1Style.height             //swapping height animation
                             bar1Style.height = bar2Style.height
                             bar2Style.height = temp
@@ -113,6 +108,7 @@ const ControlBar = (props) => {
     const stopRun = () => {                 // hacky soulution to stopping the amnimations due to the async setTimeouts in the call stack  
         window.location.reload(true);
     }
+
     // const marks = [{ value: 10, label: 'Fast'} , { value: 200, label: 'Slow'}]
     
     return (
