@@ -20,17 +20,11 @@ const ControlBar = (props) => {
     const data = props.data
 
     /// Data setters:
-    const setNumsArray = (newArray) => {
-        props.setData({...data, numsArray: newArray})
-    }
-
+    const setNumsArray = (newArray) => { props.setData({...data, numsArray: newArray}) }
     const setIsRunning = (state) => { props.setData({...data, isRunning: state}) }
-    const diableControlButtons = (state) => { setIsRunning(state) }
-
+    const diableControlButtons = (state) => { setIsRunning(state) }     //clear naming
     const updateBarAmount = (value) => { props.setData({...data, barAmount:value, sortSpeed:convertBarAmountToSpeed(value)}) }
-
     const updateSortingSpeed = (value) => { props.setData({...data, sortSpeed:value}) }
-
     const updateCurrentAlgo = (value) => { props.setData({...data, currentAlgo:value}) }
 
 
@@ -48,20 +42,16 @@ const ControlBar = (props) => {
         setNumsArray([...newNums])
     }
 
-    const getRandomNum =  (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
+    const getRandomNum =  (min, max) => { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
-    const convertBarAmountToSpeed = (barAmount) => {            //TO DO: CREATE A FUNCTION ?
-        return barAmount>80 ? 10 : barAmount>60 ? 15 : barAmount>60 ? 20 : barAmount>40 ? 30 : barAmount>20 ? 50 : barAmount>5 ? 100 : 500
+    const convertBarAmountToSpeed = (barAmount) => {            //UX design 
+        return barAmount>80 ? 10 : barAmount>60 ? 15 : barAmount>60 ? 20 : barAmount>40 ? 30 : barAmount>20 ? 50 : barAmount>5 ? 100 : 500 
     }
-    
 
     useEffect(generateNewBars, [data.barAmount])
 
 
     const sort = () => {
-        // sortBtnRef.current.disabled = true; 
         diableControlButtons(true)
         const { sortedArr, animations } = algos[data.currentAlgo]([...data.numsArray])   //retrive animations and sorted bars array
         for( let i=0; i<animations.length; i++){
@@ -113,7 +103,7 @@ const ControlBar = (props) => {
         }, animations.length*data.sortSpeed)
     }
 
-    const marks = [{ value: 10, label: 'Fast'} , { value: 200, label: 'Slow'}]
+    // const marks = [{ value: 10, label: 'Fast'} , { value: 200, label: 'Slow'}]
     
     return (
         <AppBar position="static">
@@ -123,12 +113,13 @@ const ControlBar = (props) => {
                 
                 <div id="speedSet-slider-container">
                     <Typography id="speedSet-slider" gutterBottom> Visulaizer Speed: </Typography>
-                    <Slider defaultValue={30} step={20} min={10} max={200} style={{color:"black"}}
+                    <Slider defaultValue={30} step={5} min={5} max={100} style={{color:"black"}}
+                    //step={20} min={10} max={200}
                     aria-labelledby="speedSet-slider" 
                     disabled={data.isRunning ? true : null}
-                    onChangeCommitted={(event, value) => updateSortingSpeed(value)}
-                    value={data.sortSpeed}
-                    // scale={(x) => x ** 10}
+                        onChangeCommitted={(event, value) => updateSortingSpeed((Math.floor(1000/value)))}      //values conversions in order to make slider from slow 2 fast
+                        value={1000/data.sortSpeed}
+                    // scale={(x) => x/1000}
                     // marks={marks}
                     // track="inverted"
                     />
