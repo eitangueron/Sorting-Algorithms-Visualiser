@@ -1,4 +1,25 @@
 # Sorting algo project
+I find sorting algothimes fasicinating and elegent.
+I saw clements sorting algos visulaitzer project and imediatkey knew i'll create my version.
+Enjoyed it deeply and learned a lot. Defenatly will ace my sorting algos questions in my dsa uni course.
+Used react for this project and a simple node server.
+Here you can view the affects of comparisment bassed sorting algos on a random and sorted arrays.
+Each bar represents a number, height is accordingly.
+The numbers that are compared are marked in yellow, and you can see the swaps occuring.
+
+Interesting to notice:
+-the divide and concure pattern in the merge sort
+-how slow is bubble sort
+-when an array is sorted quick sort has a horrible complexity due to the choice of the pivot to b the last elemts which is recursivly the maximum.
+
+## How to use:
+pick number of bars (numbers in the array)
+pick an algorithem
+pick sorting speed (I recommend using the default speed we configured and re running adapted )
+click sort and watch
+
+you can refresh whenever 
+you can create new bars which represents an array of numbers and redo it all
 
 ## to do:
 - buttons nav bar
@@ -6,13 +27,6 @@
 - graphs of div by num val
 - sorting algos ?
 
-
-
-# React Bank
-
-React Bank is my first project using react. The app allows users to track their expenses and view all their expenses by category. Although the design wasn't the core goal of this project, i added some basic pie charts, and made it fit for mobile view as well as web.
-
-Demo: [https://react-bank-eitang.herokuapp.com/](https://react-bank-eitang.herokuapp.com/)
 
 ## Table Of Contents
 - [React Bank](#ReactBank)
@@ -27,16 +41,15 @@ Demo: [https://react-bank-eitang.herokuapp.com/](https://react-bank-eitang.herok
 
 ## Running the project
 
-Preferably check the online demo, 
+Preferably check the online demo: [https://sortingalgosvis-eg.herokuapp.com/](https://sortingalgosvis-eg.herokuapp.com/)
 
 Otherwise:
 
 1. Clone the repo.
 2. Run `npm install`.
 3. Run `npm run build`
-4. Run `mongod`
-5. Run `npm start`.
-6. Navigate to `http://localhost:4000`.
+4. Run `npm start`.
+5. Navigate to `http://localhost:3001`.
 
 ## Screenshots
 
@@ -62,7 +75,5 @@ A basic overview of your expenses by category, and some simple piecharts as visu
 
 
 ## Techstack
-1. React, Material-UI and Axios. 
-2. Express (Node.js), Mongoose (MongoDB).
-3. A cute simple random quotes API
-
+1. React, Material-UI. 
+2. Express (Node.js).

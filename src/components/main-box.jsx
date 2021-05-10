@@ -18,7 +18,7 @@ const MainBox = (props) => {
                     height:`${num*0.089}vh`,
                     top:`calc(88vh - ${num*0.089}vh)`,
                 }}>
-                {data.barAmount <=30 ?
+                {data.barAmount <=20 ?
                     <span className="bar-size">{num}</span> : null}
                 </div>
                 </Tooltip>)

@@ -50,8 +50,11 @@ const ControlBar = (props) => {
 
     useEffect(generateNewBars, [data.barAmount])
 
+    let name 
 
     const sort = () => {
+        const sortBtn = document.getElementById("sortBtn")
+        sortBtn.textContent = "Reset"
         diableControlButtons(true)
         const { sortedArr, animations } = algos[data.currentAlgo]([...data.numsArray])   //retrive animations and sorted bars array
         for( let i=0; i<animations.length; i++){
@@ -73,7 +76,7 @@ const ControlBar = (props) => {
                     const newBarVal = animations[i][1]
                     setTimeout( () => {     
                         bars[barIndex].style.height = `${newBarVal*0.089}vh`
-                        if(data.barAmount<=30){     //num visable - updatding values
+                        if(data.barAmount<=20){     //num visable - updatding values
                             barsInnerText[barIndex].textContent = newBarVal
                         }
                     },i*data.sortSpeed)
@@ -83,11 +86,14 @@ const ControlBar = (props) => {
                     if(swapped){                //animation occuring only if true = value change occurd
                         const bar1Style = bars[bar1].style
                         const bar2Style = bars[bar2].style
-                        setTimeout( () => {     
+                        setTimeout( () => {   
+                            if(name=="eitan")  {
+                                console.log(name)
+                            }
                             let temp = bar1Style.height             //swapping height animation
                             bar1Style.height = bar2Style.height
                             bar2Style.height = temp
-                            if(data.barAmount<=30){     //num visable - updatding text values
+                            if(data.barAmount<=20){     //num visable - updatding text values
                                 let tempNum = barsInnerText[bar1].textContent
                                 barsInnerText[bar1].textContent = barsInnerText[bar2].textContent
                                 barsInnerText[bar2].textContent = tempNum
@@ -98,11 +104,15 @@ const ControlBar = (props) => {
             }
         }
         setTimeout( () => {     //critical for updating tooltips
+            sortBtn.textContent = "Sort!"
             diableControlButtons(false)
             setNumsArray(sortedArr)
         }, animations.length*data.sortSpeed)
     }
 
+    const stopRun = () => {                 // hacky soulution to stopping the amnimations due to the async setTimeouts in the call stack  
+        window.location.reload(true);
+    }
     // const marks = [{ value: 10, label: 'Fast'} , { value: 200, label: 'Slow'}]
     
     return (
@@ -154,7 +164,10 @@ const ControlBar = (props) => {
                     </NativeSelect>
                 </FormControl>
                 
-                <Button  onClick={sort} disabled={data.isRunning ? true : null} variant="contained"
+                <Button id="sortBtn" variant="contained" 
+                // onClick={sort} 
+                // disabled={data.isRunning ? true : null} stopRun
+                onClick={data.isRunning ? stopRun : sort}
                 style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}
                 > Sort! 
                 </Button>
