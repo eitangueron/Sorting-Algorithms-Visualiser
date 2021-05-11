@@ -29,10 +29,8 @@ const ControlBar = (props) => {
 
 
     /// Helpers:
-    const generateNewBars = () => {
-        createRandomNumsArray(data.barAmount, data.minBarSize, data.maxBarSize)
-    }
-    
+    const getRandomNum =  (min, max) => { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    const generateNewBars = () => { createRandomNumsArray(data.barAmount, data.minBarSize, data.maxBarSize) }
     const createRandomNumsArray = (numsAmmount, minNumsRange, maxNumsRange) => {
         let newNums = [] 
         for(let i=0; i<numsAmmount; i++){
@@ -41,8 +39,6 @@ const ControlBar = (props) => {
         }
         setNumsArray([...newNums])
     }
-
-    const getRandomNum =  (min, max) => { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
     const convertBarAmountToSpeed = (barAmount) => {            //UX design 
         return barAmount>80 ? 10 : barAmount>60 ? 15 : barAmount>60 ? 20 : barAmount>40 ? 30 : barAmount>20 ? 50 : barAmount>5 ? 100 : 500 
@@ -105,6 +101,7 @@ const ControlBar = (props) => {
         }, animations.length*data.sortSpeed)
     }
 
+    
     const stopRun = () => {                 // hacky soulution to stopping the amnimations due to the async setTimeouts in the call stack  
         window.location.reload(true);
     }
@@ -118,12 +115,11 @@ const ControlBar = (props) => {
            <div id="controlBar-setters-left">
                 
                 <div id="speedSet-slider-container">
-                    <Typography id="speedSet-slider" gutterBottom> Visulaizer Speed: </Typography>
+                    <Typography id="speedSet-slider" gutterBottom> Visualizer Speed: </Typography>
                     <Slider defaultValue={30} step={5} min={5} max={100} style={{color:"black"}}
-                    //step={20} min={10} max={200}
                     aria-labelledby="speedSet-slider" 
                     disabled={data.isRunning ? true : null}
-                        onChangeCommitted={(event, value) => updateSortingSpeed((Math.floor(1000/value)))}      //values conversions in order to make slider from slow 2 fast
+                    onChange={(event, value) => updateSortingSpeed((Math.floor(1000/value)))}      //values conversions in order to make slider from slow 2 fast
                         value={1000/data.sortSpeed}
                     // scale={(x) => x/1000}
                     // marks={marks}
@@ -141,22 +137,22 @@ const ControlBar = (props) => {
                 </div>
 
                 <Button onClick={generateNewBars} disabled={data.isRunning ? true : null} variant="contained"
-                style={{background:"white", fontSize:"16px", fontWeight:'bold', textTransform:"none", lineHeight:"1.3"}} 
-                > Create New Bars 
+                style={{background:"white", fontSize:"16px", fontWeight:'bold', textTransform:"none", lineHeight:"1.3"}} > 
+                Create New Bars 
                 </Button>
 
            </div>
 
            <div id="controlBar-chooseSortAlgo-right">
                 <FormControl>
-                    <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithem</InputLabel>
+                    <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithm</InputLabel>
                     <NativeSelect 
                     disabled={data.isRunning ? true : null}
                     onChange={(event) => updateCurrentAlgo(event.target.value)}>
-                    <option value="bubbleSort">Bubble sort</option>
-                    <option value="heapSort">Heap sort</option>
-                    <option value="mergeSort">Merge sort</option>
-                    <option value="quickSort">Quick sort</option>
+                    <option value="bubbleSort">Bubble Sort</option>
+                    <option value="heapSort">Heap Sort</option>
+                    <option value="mergeSort">Merge Sort</option>
+                    <option value="quickSort">Quick Sort</option>
                     </NativeSelect>
                 </FormControl>
                 

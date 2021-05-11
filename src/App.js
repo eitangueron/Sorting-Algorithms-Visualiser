@@ -10,9 +10,9 @@ const App = observer((props) => {
   const [data, setData] = useState({
     numsArray:[],
     barAmount:20,
-    sortSpeed:15,     //smaller is faster!! | due to slider design trick
-    minBarSize:50,    //less bar wont b visable
-    maxBarSize:1000,
+    sortSpeed:15,     //smaller is faster!! | due to slider designing trick
+    minBarSize:50,    //less then this bars wont b visable
+    maxBarSize:999,
     currentAlgo:"bubbleSort",
     isRunning:false
   },)
