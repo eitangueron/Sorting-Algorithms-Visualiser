@@ -1,79 +1,60 @@
-# Sorting algo project
-I find sorting algothimes fasicinating and elegent.
-I saw clements sorting algos visulaitzer project and imediatkey knew i'll create my version.
-Enjoyed it deeply and learned a lot. Defenatly will ace my sorting algos questions in my dsa uni course.
-Used react for this project and a simple node server.
-Here you can view the affects of comparisment bassed sorting algos on a random and sorted arrays.
+# Sorting Algorithms Visualiser
+
+## <ins> Preview:</ins> 👀
+Welcome to my Sorting Algorithms Visualiser!👋
+
+I got inspired by [clément mihailescu](https://www.youtube.com/channel/UCaO6VoaYJv4kS-TQO_M-N_g). When I saw his project I immediately knew i'll create my own version one day.
+
+Here you can view the affects of compartment based sorting Algorithms on random and sorted integers arrays.
 Each bar represents a number, height is accordingly.
-The numbers that are compared are marked in yellow, and you can see the swaps occuring.
+The numbers that are compared are marked in yellow, and you can see the swaps occurring.
 
-Interesting to notice:
--the divide and concure pattern in the merge sort
--how slow is bubble sort
--when an array is sorted quick sort has a horrible complexity due to the choice of the pivot to b the last elemts which is recursivly the maximum.
+Personally, i'm fascinated by sorting algorithms and enjoyed deeply creating this project, and enhanced my knowledge through it. I hope that you'll enjoy playing around with this visualisation tool just as much as I enjoyed building it, and maybe notice and learn something new from seeing the Algorithms visualised. 💪💙
 
-## How to use:
-pick number of bars (numbers in the array)
-pick an algorithem
-pick sorting speed (I recommend using the default speed we configured and re running adapted )
-click sort and watch
+## <ins> How to use:
+- Pick an algorithm
+- Choose number of bars (==numbers in the array)
+- Choose sorting speed (I recommend using the default speed configured and re running adapted if you wish)
+- Click the sort button and watch how the algorithm works :)
+- When the animation is done, you can run the algorithms again on a sorted array and watch how it behaves in this case, or you can create new bars and repeat the steps
+- Enjoy 💙😊
 
-you can refresh whenever 
-you can create new bars which represents an array of numbers and redo it all
-
-## to do:
-- buttons nav bar
-- random nums array
-- graphs of div by num val
-- sorting algos ?
+## <ins> Interesting to notice:</ins> 🤔🧐
+- The <b>divide and conquer</b> principal displayed in merge sort 
+- When quick sort is run on a sorted array - which is its worst case scenario, the pivot choice of the last eelement is recursively the maximum and it's horribly ineffective.
+- How ineffective and aggressive bubble sort is
 
 
-## Table Of Contents
-- [React Bank](#ReactBank)
-  * [Running the project](#running-the-project)
-  * [Screenshots](#screenshots)
-    + [Expense-List](#expense-list)
-    + [Add Expense](#add-expense)
-    + [Reports](#reports)
-    + [Menu](#menu)
-  * [Tech Stack](#tech-stack)
+## <ins> Running the project:</ins> 🏃‍♂️
 
+### Preferably check the online demo:
 
-## Running the project
+[https://sortingalgosvis-eg.herokuapp.com/](https://sortingalgosvis-eg.herokuapp.com/)
 
-Preferably check the online demo: [https://sortingalgosvis-eg.herokuapp.com/](https://sortingalgosvis-eg.herokuapp.com/)
+(Preferably Google Chrome!)
 
-Otherwise:
+### Otherwise:
 
-1. Clone the repo.
-2. Run `npm install`.
+1. Clone the repo
+2. Run `npm install`
 3. Run `npm run build`
-4. Run `npm start`.
-5. Navigate to `http://localhost:3001`.
+4. Run `npm start`
+5. Navigate in browser to `http://localhost:3001`
 
-## Screenshots
 
-### Landing Page
-A landing page greeting the users, includes a random quote (From Random quotes API).
+## <ins> Techstack:</ins> 🛠👨‍💻
+- React 
+- Node.js Express
+- Material-UI
+<p align="left"><a href="https://reactjs.org/" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> </p>
+
+
+## <ins> Screenshots:</ins> 📸
+
+### Unsorted:
 
 <p align="center"><img src="imgs4readme/landingPage.png" width="500" /></p>
 
-### Transactions
-An overview of all your expenses.
+### Mid Sort:
 
-<p align="center"><img src="imgs4readme/transactionsPage.png" width="500" /></p>
-
-### Add Expense
-Fill out the inputs and then either add a new *Deposit* or a new *Withdraw*.
-
-<p align="center"><img src="imgs4readme/actionsPage.png" width="500" /></p>
-
-### Analytics
-A basic overview of your expenses by category, and some simple piecharts as visual aids.
-
-<p align="center"><img src="imgs4readme/analyticsPage.png" width="500" /></p>
-
-
-## Techstack
-1. React, Material-UI. 
-2. Express (Node.js).
+### Sorted:
