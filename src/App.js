@@ -6,11 +6,9 @@ import MainBox from './components/main-box';
 
 
 const App = observer((props) => {
-    
-  // const cachedData = JSON.parse(sessionStorage.getItem('sortingAlgosCachedData'));
-  
+      
   const [data, setData] = useState(
-    JSON.parse(sessionStorage.getItem('sortingAlgosCachedData')) || 
+    JSON.parse(sessionStorage.getItem('sortingAlgosCachedData')) ||
     {
     numsArray:[],
     barAmount: 20,

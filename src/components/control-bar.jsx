@@ -22,7 +22,7 @@ const ControlBar = (props) => {
     /// Data setters:
     const setNumsArray = (newArray) => { props.setData({...data, numsArray: newArray}) }
     const setIsRunning = (state) => { props.setData({...data, isRunning: state}) }
-    const diableControlButtons = (state) => { setIsRunning(state) }     //clear naming
+    const diableControlButtons = (state) => { setIsRunning(state) }     //clearer naming
     const updateBarAmount = (value) => { props.setData({...data, barAmount:value, sortSpeed:convertBarAmountToSpeed(value)}) }
     const updateSortingSpeed = (value) => { props.setData({...data, sortSpeed:value}) }
     const updateCurrentAlgo = (value) => { props.setData({...data, currentAlgo:value}) }
@@ -46,59 +46,67 @@ const ControlBar = (props) => {
 
     useEffect(generateNewBars, [data.barAmount])
 
-    const sort = () => {
+    const changeBarsColors = (bar1, bar2, color) => {
+        const bars = document.getElementsByClassName("bar")
+        bars[bar1].style.backgroundColor = color
+        bars[bar2].style.backgroundColor = color
+    }
+
+    const swapBarsAnimation = (bar1, bar2) => {
+        const bars = document.getElementsByClassName("bar")
+        const barsInnerText = document.getElementsByClassName("bar-size")
+        let temp = bars[bar1].style.height             //swapping height animation
+        bars[bar1].style.height = bars[bar2].style.height
+        bars[bar2].style.height = temp
+        if(data.barAmount<=20){     //num visable - updatding text values
+            let tempNum = barsInnerText[bar1].textContent
+            barsInnerText[bar1].textContent = barsInnerText[bar2].textContent
+            barsInnerText[bar2].textContent = tempNum
+        }
+    }
+
+    const mergeSortSwapBarsAnimation = (animation) => {
+        const [barIndex, newBarVal] = animation
+        const barsInnerText = document.getElementsByClassName("bar-size")
+        const bars = document.getElementsByClassName("bar")  
+        bars[barIndex].style.height = `${newBarVal*0.089}vh`
+        if(data.barAmount<=20){     //num visable - updatding values
+            barsInnerText[barIndex].textContent = newBarVal
+        }
+    }
+
+    const sortStartedStyling = () => {
         const sortBtn = document.getElementById("sortBtn")
         sortBtn.textContent = "Reset"
         diableControlButtons(true)
-        const { sortedArr, animations } = algos[data.currentAlgo]([...data.numsArray])   //retrive animations and sorted bars array
+    }
+
+    const sortEndedStyling = (sortedArr) => {
+        const sortBtn = document.getElementById("sortBtn")
+        sortBtn.textContent = "Sort!"
+        diableControlButtons(false)
+        setNumsArray(sortedArr)
+    }
+
+    const sort = () => {
+        sortStartedStyling()
+        const { sortedArr, animations } = algos[data.currentAlgo]([...data.numsArray])      //retrive animations and sorted bars array
         for( let i=0; i<animations.length; i++){
-            const bars = document.getElementsByClassName("bar")
-            const barsInnerText = document.getElementsByClassName("bar-size")
-            const barsColor = i%3===0 ? "yellow" : "#3498db"            //mark with yellow | unmark back to bars blue
-            const bar1 = animations[i][0]
-            const bar2 = animations[i][1]
-            if(i%3!==2){        // mark/unmarks bars
-                const bar1Style = bars[bar1].style
-                const bar2Style = bars[bar2].style
-                setTimeout( () => {
-                    bar1Style.backgroundColor = barsColor
-                    bar2Style.backgroundColor = barsColor
-                },i*data.sortSpeed)
+            const [bar1, bar2, swapped] = animations[i]
+            if(i%3!==2){
+                const barsColor = i%3===0 ? "yellow" : "#3498db"            // mark yellow | unmark blue
+                setTimeout( () => { changeBarsColors(bar1,bar2,barsColor) },i*data.sortSpeed)
             } else {
                 if(data.currentAlgo==="mergeSort"){
-                    const barIndex = animations[i][0]
-                    const newBarVal = animations[i][1]
-                    setTimeout( () => {     
-                        bars[barIndex].style.height = `${newBarVal*0.089}vh`
-                        if(data.barAmount<=20){     //num visable - updatding values
-                            barsInnerText[barIndex].textContent = newBarVal
-                        }
-                    },i*data.sortSpeed)
-                }else {
-                    // bubble / heap / quick :
-                    const swapped = animations[i][2]
-                    if(swapped){                //animation occuring only if true = value change occurd
-                        const bar1Style = bars[bar1].style
-                        const bar2Style = bars[bar2].style
-                        setTimeout( () => {   
-                            let temp = bar1Style.height             //swapping height animation
-                            bar1Style.height = bar2Style.height
-                            bar2Style.height = temp
-                            if(data.barAmount<=20){     //num visable - updatding text values
-                                let tempNum = barsInnerText[bar1].textContent
-                                barsInnerText[bar1].textContent = barsInnerText[bar2].textContent
-                                barsInnerText[bar2].textContent = tempNum
-                            }
-                        },i*data.sortSpeed)
+                    setTimeout( () => { mergeSortSwapBarsAnimation(animations[i]) },i*data.sortSpeed)
+                }else { // bubble | heap | quick :
+                    if(swapped){
+                        setTimeout( () => { swapBarsAnimation(bar1, bar2) },i*data.sortSpeed)
                     }
                 }
             }
         }
-        setTimeout( () => {     //critical for updating tooltips
-            sortBtn.textContent = "Sort!"
-            diableControlButtons(false)
-            setNumsArray(sortedArr)
-        }, animations.length*data.sortSpeed)
+        setTimeout( () => { sortEndedStyling(sortedArr)}, animations.length*data.sortSpeed)     //critical for updating tooltips
     }
 
     const saveDataToSessionStorage = (keyToModifey,newVal) => { 
