@@ -9,7 +9,9 @@ Here you can view the affects of compartment based sorting Algorithms on random 
 Each bar represents a number, height is accordingly.
 The numbers that are compared are marked in yellow, and you can see the swaps occurring.
 
-Personally, i'm fascinated by sorting algorithms and enjoyed deeply creating this project, and enhanced my knowledge through it. I hope that you'll enjoy playing around with this visualisation tool just as much as I enjoyed building it, and maybe notice and learn something new from seeing the Algorithms visualised. 💪💙
+Personally, i'm fascinated by sorting algorithms and enjoyed deeply creating this project and enhanced my knowledge through it. 
+
+I hope that you'll enjoy playing around with this visualisation tool just as much as I enjoyed building it, and maybe notice and learn something new from seeing the algorithms visualised. 💪💙
 
 ## <ins> How to use:
 - Pick an algorithm
@@ -31,7 +33,7 @@ Personally, i'm fascinated by sorting algorithms and enjoyed deeply creating thi
 
 [https://sortingalgosvis-eg.herokuapp.com/](https://sortingalgosvis-eg.herokuapp.com/)
 
-(Preferably Google Chrome!)
+<!-- (Preferably Google Chrome!) -->
 
 ### Otherwise:
 

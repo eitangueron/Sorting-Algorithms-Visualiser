@@ -101,13 +101,21 @@ const ControlBar = (props) => {
         }, animations.length*data.sortSpeed)
     }
 
-    
-    const stopRun = () => {                 // hacky soulution to stopping the amnimations due to the async setTimeouts in the call stack  
+    const saveDataToSessionStorage = (keyToModifey,newVal) => { 
+        if(keyToModifey){
+            sessionStorage.setItem("sortingAlgosCachedData", JSON.stringify({...data, [keyToModifey]:newVal}));
+        } else {
+            sessionStorage.setItem("sortingAlgosCachedData", JSON.stringify(data));
+        }
+    } 
+
+    // hacky soulution to stopping the amnimations due to the async setTimeouts in the call stack
+    // saving the current state to session storage and refreshing the page
+    const stopRun = () => {      
+        saveDataToSessionStorage("isRunning",false)             
         window.location.reload(true);
     }
 
-    // const marks = [{ value: 10, label: 'Fast'} , { value: 200, label: 'Slow'}]
-    
     return (
         <AppBar position="static">
        <div id="controlBar-container">
@@ -116,27 +124,31 @@ const ControlBar = (props) => {
                 
                 <div id="speedSet-slider-container">
                     <Typography id="speedSet-slider" gutterBottom> Visualizer Speed: </Typography>
-                    <Slider defaultValue={30} step={5} min={5} max={100} style={{color:"black"}}
-                    aria-labelledby="speedSet-slider" 
-                    disabled={data.isRunning ? true : null}
-                    onChange={(event, value) => updateSortingSpeed((Math.floor(1000/value)))}      //values conversions in order to make slider from slow 2 fast
-                        value={1000/data.sortSpeed}
-                    // scale={(x) => x/1000}
-                    // marks={marks}
-                    // track="inverted"
+                    <Slider 
+                    defaultValue={data.sortSpeed} step={5} min={5} max={100} style={{color:"black"}} aria-labelledby="speedSet-slider" 
+                    value={1000/data.sortSpeed} disabled={data.isRunning ? true : null}
+                    onChange={(event, value) => {
+                        updateSortingSpeed((Math.floor(1000/value)))        //values conversions in order to make slider from slow 2 fast
+                        saveDataToSessionStorage()
+                    }}     
                     />
                 </div>
 
                 <div id="barAmount-slider-container">
                     <Typography id="barAmount-slider" gutterBottom> Bar Amount: </Typography>
-                    <Slider defaultValue={20} step={5} min={5} max={100} style={{color:"black"}}
-                        aria-labelledby="barAmount-slider" valueLabelDisplay="auto"     // marks 
-                        disabled={data.isRunning ? true : null}
-                        onChange={(event, value) => updateBarAmount(value)}
-                        />
+                    <Slider 
+                    defaultValue={data.barAmount} step={5} min={5} max={100} style={{color:"black"}}
+                    aria-labelledby="barAmount-slider" valueLabelDisplay="auto" 
+                    disabled={data.isRunning ? true : null}
+                    onChange={(event, value) => {
+                        updateBarAmount(value)
+                        saveDataToSessionStorage()
+                    }}
+                    />
                 </div>
 
-                <Button onClick={generateNewBars} disabled={data.isRunning ? true : null} variant="contained"
+                <Button 
+                onClick={generateNewBars} disabled={data.isRunning ? true : null} variant="contained"
                 style={{background:"white", fontSize:"16px", fontWeight:'bold', textTransform:"none", lineHeight:"1.3"}} > 
                 Create New Bars 
                 </Button>
@@ -147,8 +159,11 @@ const ControlBar = (props) => {
                 <FormControl>
                     <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithm</InputLabel>
                     <NativeSelect 
-                    disabled={data.isRunning ? true : null}
-                    onChange={(event) => updateCurrentAlgo(event.target.value)}>
+                    defaultValue={data.currentAlgo} disabled={data.isRunning ? true : null}
+                    onChange={(event) => {
+                        updateCurrentAlgo(event.target.value)
+                        saveDataToSessionStorage()
+                    }}>
                     <option value="bubbleSort">Bubble Sort</option>
                     <option value="heapSort">Heap Sort</option>
                     <option value="mergeSort">Merge Sort</option>
@@ -156,12 +171,11 @@ const ControlBar = (props) => {
                     </NativeSelect>
                 </FormControl>
                 
-                <Button id="sortBtn" variant="contained" 
-                // onClick={sort} 
-                // disabled={data.isRunning ? true : null} stopRun
-                onClick={data.isRunning ? stopRun : sort}
+                <Button 
+                id="sortBtn" variant="contained" 
                 style={{background:"white", marginLeft:"1vw", fontSize:"20px", fontWeight:'bold'}}
-                > Sort! 
+                onClick={data.isRunning ? stopRun : sort}>
+                Sort! 
                 </Button>
 
             </div>
