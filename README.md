@@ -51,10 +51,19 @@ Personally, i'm fascinated by sorting algorithms and enjoyed deeply creating thi
 
 ## <ins> Screenshots:</ins> 📸
 
-### Unsorted:
+### <ins>Unsorted:</ins>
 
-<p align="center"><img src="imgs4readme/landingPage.png" width="500" /></p>
+<p align="center"><img src="readme_imgs/unsorted_small.png" width="500" /></p>
+<p align="center"><img src="readme_imgs/unsoreted_large.png" width="500" /></p>
 
-### Mid Sort:
+### <ins>Mid Sort:</ins>
 
-### Sorted:
+<p align="center"><img src="readme_imgs/mid bubble sort small array.png" width="500" /></p>
+<p align="center"><img src="readme_imgs/mid heap sort mid array.png" width="500" /></p>
+<p align="center"><img src="readme_imgs/mid merge sort large array.png" width="500" /></p>
+<p align="center"><img src="readme_imgs/mid quick sort mid array.png" width="500" /></p>
+
+### <ins>Sorted:</ins>
+
+<p align="center"><img src="readme_imgs/sorted_small.png" width="500" /></p>
+<p align="center"><img src="readme_imgs/sorted_large.png" width="500" /></p>
