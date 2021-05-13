@@ -4,7 +4,7 @@
 Welcome to my Sorting Algorithms Visualiser!👋
 
 I got inspired by [clément mihailescu](https://www.youtube.com/channel/UCaO6VoaYJv4kS-TQO_M-N_g). When I saw his project I immediately knew i'll create my own version one day.
-hh
+
 Here you can view the affects of compartment based sorting Algorithms on random and sorted integers arrays.
 Each bar represents a number, height is accordingly.
 The numbers that are compared are marked in yellow, and you can see the swaps occurring.
