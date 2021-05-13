@@ -16,7 +16,6 @@ import heapSort from '../algo-helpers/heapSort'
 const ControlBar = (props) => {
     
     const algos = {bubbleSort:bubbleSort, mergeSort:mergeSort, quickSort:quickSort, heapSort:heapSort}
-
     const data = props.data
 
     /// Data setters:
@@ -93,10 +92,10 @@ const ControlBar = (props) => {
         const { sortedArr, animations } = algos[data.currentAlgo]([...data.numsArray])      //retrive animations and sorted bars array
         for( let i=0; i<animations.length; i++){
             const [bar1, bar2, swapped] = animations[i]
-            if(i%3!==2){
+            if(i%3!==2){        //mark
                 const barsColor = i%3===0 ? "yellow" : "#3498db"            // mark yellow | unmark blue
                 setTimeout( () => { changeBarsColors(bar1,bar2,barsColor) },i*data.sortSpeed)
-            } else {
+            } else {    //swap
                 if(data.currentAlgo==="mergeSort"){
                     setTimeout( () => { mergeSortSwapBarsAnimation(animations[i]) },i*data.sortSpeed)
                 }else { // bubble | heap | quick :
@@ -117,6 +116,8 @@ const ControlBar = (props) => {
         }
     } 
 
+    useEffect(saveDataToSessionStorage,[data])
+
     // hacky soulution to stopping the amnimations due to the async setTimeouts in the call stack
     // saving the current state to session storage and refreshing the page
     const stopRun = () => {      
@@ -135,10 +136,7 @@ const ControlBar = (props) => {
                     <Slider 
                     defaultValue={data.sortSpeed} step={5} min={5} max={100} style={{color:"black"}} aria-labelledby="speedSet-slider" 
                     value={1000/data.sortSpeed} disabled={data.isRunning ? true : null}
-                    onChange={(event, value) => {
-                        updateSortingSpeed((Math.floor(1000/value)))        //values conversions in order to make slider from slow 2 fast
-                        saveDataToSessionStorage()
-                    }}     
+                    onChange={(event, value) => updateSortingSpeed((Math.floor(1000/value)))}        //values conversions in order to make slider from slow 2 fast
                     />
                 </div>
 
@@ -148,10 +146,7 @@ const ControlBar = (props) => {
                     defaultValue={data.barAmount} step={5} min={5} max={100} style={{color:"black"}}
                     aria-labelledby="barAmount-slider" valueLabelDisplay="auto" 
                     disabled={data.isRunning ? true : null}
-                    onChange={(event, value) => {
-                        updateBarAmount(value)
-                        saveDataToSessionStorage()
-                    }}
+                    onChange={(event, value) => updateBarAmount(value)}
                     />
                 </div>
 
@@ -168,10 +163,7 @@ const ControlBar = (props) => {
                     <InputLabel shrink htmlFor="age-native-label-placeholder">Pick an algorithm</InputLabel>
                     <NativeSelect 
                     defaultValue={data.currentAlgo} disabled={data.isRunning ? true : null}
-                    onChange={(event) => {
-                        updateCurrentAlgo(event.target.value)
-                        saveDataToSessionStorage()
-                    }}>
+                    onChange={(event) => updateCurrentAlgo(event.target.value)}>
                     <option value="bubbleSort">Bubble Sort</option>
                     <option value="heapSort">Heap Sort</option>
                     <option value="mergeSort">Merge Sort</option>
