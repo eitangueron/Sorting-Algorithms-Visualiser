@@ -24,6 +24,7 @@ I hope that you'll enjoy playing around with this visualisation tool just as muc
 ## <ins> Interesting to notice:</ins> 🤔🧐
 - The <b>divide and conquer</b> principal displayed in merge sort 
 - When quick sort is run on a sorted array - which is its worst case scenario, the pivot choice of the last eelement is recursively the maximum and it's horribly ineffective.
+- Stages of heap sort regardless if the heap is sorted or not (building a heap, extracting max and heapifying down)
 - How ineffective and aggressive bubble sort is
 
 
