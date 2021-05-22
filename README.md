@@ -34,8 +34,9 @@ I hope that you'll enjoy playing around with this visualisation tool just as muc
 
 [https://sortingalgosvis-eg.herokuapp.com/](https://sortingalgosvis-eg.herokuapp.com/)
 
-(Preferably Google Chrome!)
-Might take a couple of seconds for the initial load due to the free hosting service
+- Preferably Google Chrome!
+
+- Might take a couple of seconds for the initial load due to the free hosting service
 
 ### Otherwise:
 
