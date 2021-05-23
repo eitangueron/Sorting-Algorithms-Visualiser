@@ -3,15 +3,15 @@
 ## <ins> Preview:</ins> 👀
 Welcome to my Sorting Algorithms Visualiser!👋
 
-I got inspired by [clément mihailescu](https://www.youtube.com/channel/UCaO6VoaYJv4kS-TQO_M-N_g). When I saw his project I immediately knew i'll create my own version one day.
+I got inspired by [clément mihailescu](https://www.youtube.com/channel/UCaO6VoaYJv4kS-TQO_M-N_g). When I saw his project I immediately knew I'll create my own version one day.
 
-Here you can view the affects of compartment based sorting Algorithms on random and sorted integers arrays.
+You can view the effects of Comparison based sorting Algorithms on random and sorted integers arrays.
 Each bar represents a number, height is accordingly.
 The numbers that are compared are marked in yellow, and you can see the swaps occurring.
 
-Personally, i'm fascinated by sorting algorithms and enjoyed deeply creating this project and enhanced my knowledge through it. 
+Personally, I'm fascinated by sorting algorithms and deeply enjoyed creating this project and enhanced my knowledge through it.
 
-I hope that you'll enjoy playing around with this visualisation tool just as much as I enjoyed building it, and maybe notice and learn something new from seeing the algorithms visualised. 💪💙
+I hope that you'll enjoy playing around with this visualization tool just as much as I enjoyed building it, and maybe notice and learn something new from seeing the algorithms visualized. 💪💙
 
 ## <ins> How to use:
 - Pick an algorithm
@@ -22,8 +22,8 @@ I hope that you'll enjoy playing around with this visualisation tool just as muc
 - Enjoy 💙😊
 
 ## <ins> Interesting to notice:</ins> 🤔🧐
-- The <b>divide and conquer</b> principal displayed in merge sort 
-- When quick sort is run on a sorted array - which is its worst case scenario, the pivot choice of the last eelement is recursively the maximum and it's horribly ineffective.
+- The <b>divide and conquer</b> principle displayed in merge sort 
+- When the quick sort is run on a sorted array - which is its worst-case scenario, the pivot choice of the last element is recursively the maximum and it's horribly ineffective.
 - Stages of heap sort regardless if the heap is sorted or not (building a heap, extracting max and heapifying down)
 - How ineffective and aggressive bubble sort is
 
